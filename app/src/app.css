@@ -1,0 +1,8 @@
+.app {
+  margin: 2rem;
+  text-align: center;
+}
+
+.react-calendar__tile--active {
+  background: lightblue
+}
