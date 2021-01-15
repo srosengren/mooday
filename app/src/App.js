@@ -22,10 +22,30 @@ function Main() {
     history.push(dateToKey(date));
   }
 
+  function setMood(moodLevel) {
+    fetch('http://localhost:7071/api/moods', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        dateYYYYMMDD: dateParam,
+        type: 1,
+        moodLevel,
+      })
+    })
+  }
+
   return (
     <>
       <Calendar onChange={setSelectedDate} value={selectedDate} />
       <h2>{selectedDate.toDateString()}</h2>
+      <p>What's your mood today?</p>
+      <button type="button" onClick={() => setMood(5)}>😁</button>
+      <button type="button" onClick={() => setMood(4)}>😊</button>
+      <button type="button" onClick={() => setMood(3)}>😐</button>
+      <button type="button" onClick={() => setMood(2)}>😕</button>
+      <button type="button" onClick={() => setMood(1)}>😟</button>
     </>
   );
 }
