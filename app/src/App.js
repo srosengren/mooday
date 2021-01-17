@@ -48,21 +48,22 @@ function Main() {
   }, [])
 
   function setMood(moodLevel) {
-    const mood = {
-      dateYYYYMMDD: dateParam,
-      type: 1,
-      moodLevel,
-    };
-    fetch('http://localhost:7071/api/moods', {
-      method: 'POST',
+    fetch(`http://localhost:7071/api/moods/${dateParam}/1`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(mood)
+      body: JSON.stringify({
+        moodLevel
+      })
     }).then(() => {
       setAllMoods({
         ...allMoods,
-        [mood.dateYYYYMMDD]: mood
+        [dateParam]: {
+          dateYYYYMMDD: dateParam,
+          type: 1,
+          moodLevel,
+        }
       });
     });
   }
